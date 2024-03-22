@@ -35,3 +35,19 @@ const arr = [1, 2, 3]
 for (let value of arr) {
   console.log(value)
 }
+
+// Starting from ES2015, you can use Object.keys(), Object.values(), or Object.entries() methods to get arrays of keys, values, or key-value pairs respectively, which can then be iterated over.
+
+// Object.keys(): This method returns an array of a given object's own enumerable property names,
+
+const keys = Object.keys(obj)
+console.log(keys)
+
+// Object.values(): This method returns an array of a given object's own enumerable property values,
+const values = Object.values(obj)
+console.log(values)
+
+// Object.entries(): This method returns an array of a given object's own enumerable property [key, value] pairs,
+const entries = Object.entries(obj)
+console.log(entries)
+// console.log(entries[1][1])
