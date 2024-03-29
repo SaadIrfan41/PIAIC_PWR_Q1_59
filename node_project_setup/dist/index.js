@@ -1,29 +1,38 @@
+#! /usr/bin / env node
 import inquirer from 'inquirer';
-const answers = await inquirer.prompt([
+const answer = await inquirer.prompt([
     {
-        type: 'input',
-        name: 'name',
-        message: 'What is your name?',
-    },
-    {
+        message: 'Enter first Number',
         type: 'number',
-        name: 'age',
-        message: 'What is your age?',
+        name: 'firstnumber',
     },
     {
+        message: 'Enter second Number',
+        type: 'number',
+        name: 'secondnumber',
+    },
+    {
+        message: 'Choose Operator',
         type: 'list',
-        name: 'gender',
-        message: 'What is your gender?',
-        choices: ['Male', 'Female'],
+        name: 'operator',
+        choices: ['Addition', 'Subtraction', 'Multiplication', 'Division'],
     },
 ]);
-console.log(answers.name, 'is a', answers.age, 'years old', answers.gender);
-if (answers.age < 20) {
-    console.log('You are a Teenager');
+if (answer.operator === 'Addition') {
+    console.log(answer.firstnumber + answer.secondnumber);
 }
-else if (answers.age > 20 && answers.age < 50) {
-    console.log('You are an adult');
+else if (answer.operator === 'Subtraction') {
+    console.log(answer.firstnumber - answer.secondnumber);
+}
+else if (answer.operator === 'Subtraction') {
+    console.log(answer.firstnumber - answer.secondnumber);
+}
+else if (answer.operator === 'Multiplication') {
+    console.log(answer.firstnumber * answer.secondnumber);
+}
+else if (answer.operator === 'Division') {
+    console.log(answer.firstnumber / answer.secondnumber);
 }
 else {
-    console.log('You are OLD');
+    console.log('Please Select a Valid Operator');
 }
