@@ -1,30 +1,50 @@
 import inquirer from 'inquirer'
 
-const answers = await inquirer.prompt([
-  {
-    type: 'input',
-    name: 'name',
-    message: 'What is your name?',
-  },
-  {
-    type: 'number',
-    name: 'age',
-    message: 'What is your age?',
-  },
-  {
-    type: 'list',
-    name: 'gender',
-    message: 'What is your gender?',
-    choices: ['Male', 'Female'],
-  },
-])
+const guessedNumber = Math.floor(Math.random() * 7) + 1
 
-console.log(answers.name, 'is a', answers.age, 'years old', answers.gender)
+// Tries Allowed
+const maxTries = 6
+let triesLeft = maxTries
 
-// if (answers.age < 20) {
-//   console.log('You are a Teenager')
-// } else if (answers.age > 20 && answers.age < 50) {
-//   console.log('You are an adult')
-// } else {
-//   console.log('You are OLD')
-// }
+// Start the Game
+
+function startGame() {
+  console.log('Welcome to the Number Guessing Game!')
+  console.log('You have 6 tries to guess the correct number between 1 and 7.\n')
+
+  function guessingGame() {
+    inquirer
+      .prompt({
+        type: 'input',
+        name: 'guess',
+        message: `Take a guess (${triesLeft} tries left):`,
+      })
+      .then((answer) => {
+        const guess = parseInt(answer.guess)
+
+        if (guess < guessedNumber) {
+          console.log('Your guess is too low.')
+        } else if (guess > guessedNumber) {
+          console.log('Your guess is too high.')
+        } else {
+          console.log(
+            `Congrats! You guessed it in the ${maxTries - triesLeft + 1} try.`
+          )
+          return
+        }
+
+        triesLeft--
+        if (triesLeft > 0) {
+          guessingGame()
+        } else {
+          console.log(
+            `Sorry, you've run out of tries. The correct number was ${guessedNumber}.`
+          )
+        }
+      })
+  }
+
+  guessingGame()
+}
+
+startGame()
