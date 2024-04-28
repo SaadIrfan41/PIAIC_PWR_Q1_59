@@ -5,7 +5,7 @@
 // function greet(item: string): string {
 //   return item
 // }
-// // Synchronous function that takes a callback
+// // // Synchronous function that takes a callback
 // function processArraySync(array: number[], abc: (item: number) => void) {
 //   for (let i = 0; i < array.length; i++) {
 //     // Call the callback function for each element of the array
@@ -23,9 +23,11 @@
 //Async Callback Function Examples
 // function hello() {
 //   setTimeout(() => {
-//     console.log('Hello World ')
+//     console.log('Hello World 2 ')
 //   }, 2000)
-//   console.log('Hello World 2')
+//   setTimeout(() => {
+//     console.log('Hello World ')
+//   }, 0)
 // }
 // console.log('Before setTimeout')
 // hello()
@@ -38,7 +40,7 @@
 //     setTimeout(() => callback(array[i]), 4000)
 //   }
 // }
-// // Asynchronous callback function
+// // // Asynchronous callback function
 // function logItemAsync(item: number) {
 //   console.log('Processing item asynchronously:', item)
 // }
@@ -66,7 +68,7 @@ function get_User_Data(data, get_next_user_Data) {
 }
 // Callback Hell
 get_User_Data(111, function () {
-    get_User_Data(222, () => {
+    get_User_Data(222, function () {
         get_User_Data(333);
     });
 });

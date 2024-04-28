@@ -1,6 +1,7 @@
 // What is a Callback Function
 
 //A callback function in JavaScript is a function that's passed as an argument to another function and is intended to be executed later, usually after some asynchronous operation completes or in response to some event.
+
 //Callback functions allow you to define behavior that should happen once a certain task is finished or an event occurs.
 //They're commonly used in asynchronous programming to handle the results of asynchronous tasks, such as fetching data from a server, reading a file, or responding to user interactions.
 
@@ -8,7 +9,7 @@
 //   return item
 // }
 
-// // Synchronous function that takes a callback
+// // // Synchronous function that takes a callback
 // function processArraySync(array: number[], abc: (item: number) => void) {
 //   for (let i = 0; i < array.length; i++) {
 //     // Call the callback function for each element of the array
@@ -30,9 +31,11 @@
 
 // function hello() {
 //   setTimeout(() => {
-//     console.log('Hello World ')
+//     console.log('Hello World 2 ')
 //   }, 2000)
-//   console.log('Hello World 2')
+//   setTimeout(() => {
+//     console.log('Hello World ')
+//   }, 0)
 // }
 // console.log('Before setTimeout')
 // hello()
@@ -46,7 +49,7 @@
 //     setTimeout(() => callback(array[i]), 4000)
 //   }
 // }
-// // Asynchronous callback function
+// // // Asynchronous callback function
 // function logItemAsync(item: number) {
 //   console.log('Processing item asynchronously:', item)
 // }
@@ -78,7 +81,7 @@ function get_User_Data(data: number, get_next_user_Data?: () => void) {
 
 // Callback Hell
 get_User_Data(111, function () {
-  get_User_Data(222, () => {
+  get_User_Data(222, function () {
     get_User_Data(333)
   })
 })
