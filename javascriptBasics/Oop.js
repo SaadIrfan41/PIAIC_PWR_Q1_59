@@ -112,12 +112,12 @@ class Manager extends Employee {
   constructor(name, dept) {
     console.log('Manager Constructor start')
     super(name)
-    this.name = name
+    this.my_name = name
     this.dept = dept
     console.log('Manager Constructor end')
   }
   department() {
-    console.log(this.name, 'is working in', this.dept)
+    console.log(this.my_name, 'is working in', this.dept)
   }
 }
 
