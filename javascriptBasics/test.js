@@ -1,6 +1,7 @@
-function hello() {
-  console.log('Hello World')
+async function foo() {
+  return 'foo'
 }
-console.log('Before setTimeout')
-setTimeout(hello, 2000)
-console.log('After setTimeout')
+
+;(async () => {
+  console.log(await foo())
+})()
