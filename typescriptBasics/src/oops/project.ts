@@ -1,6 +1,6 @@
 import inquirer from 'inquirer'
 
-export class Student {
+class Student {
   name: string
   studentID: number
   coursesEnrolled: string[]
@@ -49,3 +49,100 @@ export class Student {
     return Math.floor(10000 + Math.random() * 90000)
   }
 }
+class Course {
+  name: string
+  instructor: string
+  schedule: string
+  capacity: number
+  enrolledStudents: string[]
+
+  constructor(
+    name: string,
+    instructor: string,
+    schedule: string,
+    capacity: number
+  ) {
+    this.name = name
+    this.instructor = instructor
+    this.schedule = schedule
+    this.capacity = capacity
+    this.enrolledStudents = []
+  }
+}
+
+function addStudent() {
+  inquirer
+    .prompt([{ type: 'input', name: 'name', message: 'Enter student name:' }])
+    .then((answers) => {
+      const student = new Student(answers.name)
+      console.log(`Student ${student.name} added with ID ${student.studentID}`)
+      mainMenu(student)
+    })
+}
+
+function enrollStudent() {
+  // Implementation
+}
+
+function viewBalance(student: Student) {
+  student.viewBalance()
+  mainMenu(student)
+}
+
+function payFees() {
+  // Implementation
+}
+
+function showStudentStatus(student: Student) {
+  student.showStatus()
+  mainMenu(student)
+}
+
+function mainMenu(student: Student | null) {
+  inquirer
+    .prompt([
+      {
+        type: 'list',
+        name: 'action',
+        message: 'Choose an action:',
+        choices: [
+          'Add Student',
+          'Enroll Student',
+          'View Balance',
+          'Pay Fees',
+          'Show Student Status',
+          'Exit',
+        ],
+      },
+    ])
+    .then((answers) => {
+      switch (answers.action) {
+        case 'Add Student':
+          addStudent()
+          break
+        case 'Enroll Student':
+          enrollStudent()
+          break
+        case 'View Balance':
+          if (student) {
+            viewBalance(student)
+          }
+          break
+        case 'Pay Fees':
+          payFees()
+          break
+        case 'Show Student Status':
+          if (student) {
+            showStudentStatus(student)
+          }
+
+          break
+        case 'Exit':
+          console.log('Exiting...')
+          process.exit(0)
+      }
+    })
+}
+
+console.log('Welcome to Student Management System')
+mainMenu(null)

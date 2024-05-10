@@ -29,7 +29,6 @@ class Person {
 }
 const person = new Person('John', 30);
 console.log(person.greet());
-export {};
 // 4 Main Pillars of OOPS
 //? 1. Abstraction:
 //Abstraction is a concept that allows you to focus on the essential attributes and behaviors of an object while hiding the unnecessary details. It involves representing only the relevant characteristics of an object, and hiding the complex implementation details from the user.
@@ -68,6 +67,7 @@ export {};
 // class User {
 //   private username: string
 //   private password: string
+//   protected email?: string
 //   constructor(username: string, password: string) {
 //     this.username = username
 //     this.password = password
@@ -81,19 +81,45 @@ export {};
 //     this.password = newPassword
 //   }
 // }
+// class Admin extends User {
+//   admin_name: string = 'admin'
+//   admin_pass: string = 'admin'
+//   constructor(username: string, password: string) {
+//     super(username, password)
+//     // this.username
+//     // this.password
+//   }
+//   user_Email(email: string): string {
+//     this.email = email
+//     return this.email
+//   }
+// }
 // // Create a user
 // const user = new User('Ahmad Jafari', 'abcd1234')
+// const admin = new Admin('Adnan Khan', '1234abcd')
 // console.log(user.authenticate('12345678')) // Output: false
 // console.log(user.authenticate('abcd1234')) // Output: true
 // user.changePassword('Ab1234!?')
 // console.log(user.authenticate('abcd1234')) // Output: false
 // console.log(user.authenticate('Ab1234!?')) // Output: true
-//In this example:
-//We define a User class with a private property password.
-//password property is encapsulated and cannot be directly accessed.
-//We provide public methods authenticate() to verify the user's password and changePassword() to allow users to change their password.
-//Accessing or modifying the password property directly from outside the class is not allowed due to its private access modifier.
-//Encapsulation ensures that sensitive data (password) is hidden and can only be accessed or modified through controlled methods, enhancing security and preventing unauthorized access or manipulation.
+// // Cant access protected property 'email' outside of class
+// // console.log(user.email); // Error
+// console.log(admin.user_Email('admin@admin.com'))
+// In this example, we have two classes: User and Admin, demonstrating encapsulation in TypeScript.
+//? User Class:
+// It contains private properties username and password, and a protected property email.
+// The constructor initializes the username and password properties.
+// It provides methods like authenticate() to verify the user's password and changePassword() to allow users to change their password.
+// The password property is encapsulated as private, meaning it cannot be directly accessed or modified from outside the class.
+// The email property is marked as protected, which means it can be accessed by subclasses but not from outside the class.
+//? Admin Class (extends User):
+// It extends the User class, inheriting its properties and methods.
+// It has additional properties admin_name and admin_pass initialized to 'admin'.
+// The constructor initializes the username and password using the super() method from the parent class.
+// It defines a method user_Email() to set the email property inherited from the parent class.
+//? Usage:
+// We create instances of both User and Admin classes and demonstrate the usage of methods like authenticate() and changePassword().
+// We observe that we cannot directly access the email property outside of the class due to its protected access modifier.
 //? 3. Inheritance
 //Inheritance in OOP is a concept where a new class (called a subclass or derived class) is created based on an existing class (called a superclass or base class). The subclass inherits attributes and behaviors (methods) from its superclass, allowing it to reuse and extend the functionality of the superclass.
 //Using the Shape class example:
@@ -129,46 +155,56 @@ export {};
 //Polymorphism in OOP refers to the ability of different objects to be treated as instances of a common superclass. Simply put, it allows objects of different classes to be treated as objects of a shared superclass. This enables more flexible and dynamic code, as different objects can respond to the same method call in different ways.
 //Let's consider a real-world example involving shapes. We'll create a program that calculates the area of different shapes such as rectangles, circles, and triangles using polymorphism.
 // Parent class
-// abstract class Shape {
-//   abstract calculateArea(): number
-// }
-// // Rectangle class
-// class Rectangle extends Shape {
-//   constructor(private width: number, private height: number) {
-//     super()
-//   }
-//   calculateArea(): number {
-//     return this.width * this.height
-//   }
-// }
-// // Circle class
-// class Circle extends Shape {
-//   constructor(private radius: number) {
-//     super()
-//   }
-//   calculateArea(): number {
-//     return Math.PI * this.radius ** 2
-//   }
-// }
-// // Triangle class
-// class Triangle extends Shape {
-//   constructor(private base: number, private height: number) {
-//     super()
-//   }
-//   calculateArea(): number {
-//     return 0.5 * this.base * this.height
-//   }
-// }
-// // Function to calculate the area of any shape
-// function calculateShapeArea(shape: Shape): number {
-//   return shape.calculateArea()
-// }
-// // Creating instances of different shapes
-// const rectangle = new Rectangle(5, 10)
-// const circle = new Circle(7)
-// const triangle = new Triangle(4, 6)
-// // Using the function with different shape objects
-// console.log('Area of Rectangle:', calculateShapeArea(rectangle)) // Outputs: 50
-// console.log('Area of Circle:', calculateShapeArea(circle).toFixed(2)) // Outputs: 153.94
-// console.log('Area of Triangle:', calculateShapeArea(triangle)) // Outputs: 12
+class Shape {
+}
+// Rectangle class
+class Rectangle extends Shape {
+    width;
+    height;
+    constructor(width, height) {
+        super();
+        this.width = width;
+        this.height = height;
+    }
+    calculateArea() {
+        return this.width * this.height;
+    }
+}
+// Circle class
+class Circle extends Shape {
+    radius;
+    constructor(radius) {
+        super();
+        this.radius = radius;
+    }
+    calculateArea() {
+        return Math.PI * this.radius ** 2;
+    }
+}
+// Triangle class
+class Triangle extends Shape {
+    base;
+    height;
+    constructor(base, height) {
+        super();
+        this.base = base;
+        this.height = height;
+    }
+    calculateArea() {
+        return 0.5 * this.base * this.height;
+    }
+}
+// Function to calculate the area of any shape
+function calculateShapeArea(shape) {
+    return shape.calculateArea();
+}
+// Creating instances of different shapes
+const rectangle = new Rectangle(5, 10);
+const circle = new Circle(7);
+const triangle = new Triangle(4, 6);
+// Using the function with different shape objects
+console.log('Area of Rectangle:', calculateShapeArea(rectangle)); // Outputs: 50
+console.log('Area of Circle:', calculateShapeArea(circle).toFixed(2)); // Outputs: 153.94
+console.log('Area of Triangle:', calculateShapeArea(triangle)); // Outputs: 12
+export {};
 //In this example, Shape is the superclass, and Rectangle, Circle, and Triangle are its subclasses. They all implement the calculateArea() method differently according to their specific shapes. When we call calculateShapeArea() with different shape objects, polymorphism allows the correct version of calculateArea() to be called based on the type of shape passed. This demonstrates how polymorphism enables code to handle different types of objects in a unified manner.

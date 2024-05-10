@@ -1,4 +1,5 @@
-export class Student {
+import inquirer from 'inquirer';
+class Student {
     name;
     studentID;
     coursesEnrolled;
@@ -32,7 +33,95 @@ export class Student {
         this.coursesEnrolled.forEach((course) => console.log(`- ${course}`));
         console.log(`Balance: $${this.balance}`);
     }
+    // Math.random gives you a number between 0-1
+    // Add 10000 to it and you get a 5 digit number
+    // Multiply by 90000 and you get a 5 digit random number
+    // Use Math.floor to round down to the nearest whole number
+    // You can use this to generate a unique ID for each student
     generateUniqueID() {
-        return Math.floor(Math.random() * 90000) + 10000;
+        return Math.floor(10000 + Math.random() * 90000);
     }
 }
+class Course {
+    name;
+    instructor;
+    schedule;
+    capacity;
+    enrolledStudents;
+    constructor(name, instructor, schedule, capacity) {
+        this.name = name;
+        this.instructor = instructor;
+        this.schedule = schedule;
+        this.capacity = capacity;
+        this.enrolledStudents = [];
+    }
+}
+function addStudent() {
+    inquirer
+        .prompt([{ type: 'input', name: 'name', message: 'Enter student name:' }])
+        .then((answers) => {
+        const student = new Student(answers.name);
+        console.log(`Student ${student.name} added with ID ${student.studentID}`);
+        mainMenu(student);
+    });
+}
+function enrollStudent() {
+    // Implementation
+}
+function viewBalance(student) {
+    student.viewBalance();
+    mainMenu(student);
+}
+function payFees() {
+    // Implementation
+}
+function showStudentStatus(student) {
+    student.showStatus();
+    mainMenu(student);
+}
+function mainMenu(student) {
+    inquirer
+        .prompt([
+        {
+            type: 'list',
+            name: 'action',
+            message: 'Choose an action:',
+            choices: [
+                'Add Student',
+                'Enroll Student',
+                'View Balance',
+                'Pay Fees',
+                'Show Student Status',
+                'Exit',
+            ],
+        },
+    ])
+        .then((answers) => {
+        switch (answers.action) {
+            case 'Add Student':
+                addStudent();
+                break;
+            case 'Enroll Student':
+                enrollStudent();
+                break;
+            case 'View Balance':
+                if (student) {
+                    viewBalance(student);
+                }
+                break;
+            case 'Pay Fees':
+                payFees();
+                break;
+            case 'Show Student Status':
+                if (student) {
+                    showStudentStatus(student);
+                }
+                break;
+            case 'Exit':
+                console.log('Exiting...');
+                process.exit(0);
+        }
+    });
+}
+console.log('Welcome to Student Management System');
+mainMenu(null);
