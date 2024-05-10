@@ -89,6 +89,11 @@
 // Note: 'super' keyword is used to access the parent class properties and methods.
 // Note: To use the this keyword inside a Derived Class we must call the 'super' function to invoke the parents class constructor first.
 
+//Note: In JavaScript, when you create a subclass without defining a constructor, JavaScript automatically adds a default constructor to the subclass. This default constructor calls the constructor of the parent class using super()
+// Like This constructor(...args) {
+//     super(...args);
+// }
+
 class Employee {
   constructor(xyz) {
     console.log('Employee Constructor start')
